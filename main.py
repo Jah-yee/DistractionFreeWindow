@@ -21,7 +21,11 @@ class DistractionFreeWindowCommand(sublime_plugin.WindowCommand):
             _status_msg('Error: Window is None')
             return
 
-        if w.active_view().settings().get('is_widget', False):
+        view = w.active_view()
+        if view is None:
+            _status_msg('Error: No active view.')
+            return
+        if view.settings().get("is_widget", False):
             _status_msg('Error: Active view is a widget.')
             return
 
